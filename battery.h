@@ -12,8 +12,8 @@ typedef struct s_kbx_data {
 
 } kbx_data;
 
-int	kbx_init(kbx_data *data);
-int	kbx_refresh(kbx_data *data);
-int	kbx_release(kbx_data *data);
+int		kbx_init(kbx_data *data);
+int		kbx_refresh(kbx_data *data);
+void	kbx_release(kbx_data *data);
 
 #endif

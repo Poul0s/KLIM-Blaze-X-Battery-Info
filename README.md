@@ -75,7 +75,7 @@ int kbx_init(kbx_data *data);
 int kbx_refresh(kbx_data *data);
 
 // Release the USB device and free resources
-int kbx_release(kbx_data *data);
+void kbx_release(kbx_data *data);
 ```
 
 ### The `kbx_data` struct

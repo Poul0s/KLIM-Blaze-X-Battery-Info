@@ -51,11 +51,14 @@ static void kbx_clear_state(kbx_data *data, int state) {
 	switch (state) {
 		case 3:
 			libusb_detach_kernel_driver(data->dev_handle, 1);
+			[[fallthrough]];
 		case 2:
 			libusb_close(data->dev_handle);
+			[[fallthrough]];
 		case 1:
 			libusb_exit(data->ctx);
 			data->ctx = NULL;
+			break;
 		default:
 			break;
 	};
@@ -178,12 +181,13 @@ int kbx_refresh(kbx_data *data) {
 	if (transferred > 2 && buf[0] == 0x09 && buf[1] == 0x04) {
 		data->battery_level = buf[6];
 		data->charging_status = buf[7] & 0x01;
+		return 0;
 	} else {
 		return r;
 	}
 }
 
-int kbx_release(kbx_data *data) {
+void kbx_release(kbx_data *data) {
 	if (data->ctx) {
 		log_debug("Releasing interfaces and closing device\n");
 		libusb_release_interface(data->dev_handle, 1);

@@ -16,4 +16,5 @@ int main(void) {
 	}
 
 	kbx_release(&data);
+	return 0;
 }
